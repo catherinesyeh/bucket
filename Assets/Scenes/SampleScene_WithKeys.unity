@@ -459,6 +459,7 @@ MonoBehaviour:
   endY2: -1.45
   endX1: 2.6
   endX2: 3
+  correctTarget: 1
 --- !u!50 &1080515713
 Rigidbody2D:
   serializedVersion: 4

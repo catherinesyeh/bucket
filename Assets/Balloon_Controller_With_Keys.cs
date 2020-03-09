@@ -18,6 +18,8 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
 
     bool moving = true;
 
+    public int correctTarget = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,5 +55,11 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
     		Debug.Log("Target 2: collision detected");
     	}
     	moving = false;
+
+        if (other.name[7] == correctTarget.ToString()[0]) {
+            Debug.Log("Congratulations! You landed on the right target!");
+        } else {
+            Debug.Log("Oops! Better luck next time.");
+        }
     }
 }
