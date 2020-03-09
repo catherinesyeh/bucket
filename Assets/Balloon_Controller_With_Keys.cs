@@ -16,6 +16,8 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
     public float endX1 = 2.6f;
     public float endX2 = 3f;
 
+    bool moving = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +35,23 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-         transform.position += move * speed * Time.deltaTime;
+    	if (moving) {
+	    	var xPos = transform.position.x;
+	        transform.position = new Vector3(Mathf.PingPong(Time.time * 2, maxX - minX) + minX, transform.position.y, transform.position.z);
+
+	    	var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0); // copied code from https://answers.unity.com/questions/667641/how-do-i-move-my-2d-object-using-arrow-keys-also-h.html
+	        transform.position += move * speed * Time.deltaTime;
+	    }
+    }
+
+    // Detects collision with the targets
+    void OnTriggerEnter2D(Collider2D other) { // used tutorial https://www.youtube.com/watch?v=ZoZcBgRR9ns
+    	if (other.name == "Target 1") {
+    		Debug.Log("Target 1: collision detected");
+    	} 
+    	else if (other.name == "Target 2") {
+    		Debug.Log("Target 2: collision detected");
+    	}
+    	moving = false;
     }
 }
