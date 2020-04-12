@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Balloon_Controller_With_Keys : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
     public float speed = 1f;
 
     bool moving = true;
+    public Text message;
+    public Text instructions;
+    public Button but;
 
     public int correctTarget = 1;
 
@@ -20,8 +24,12 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
     {
         minX = transform.position.x;
         maxX = -minX;
+
         minY = transform.position.y;
         maxY = -minY;
+
+        message.text = "";
+        but.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,8 +56,13 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
 
         if (other.name[7] == correctTarget.ToString()[0]) {
             Debug.Log("Congratulations! You landed on the right target!");
+            message.text = "Congratulations! You landed on the right target!";
         } else {
             Debug.Log("Oops! Better luck next time.");
+            message.text = "Oops! Better luck next time.";
         }
+
+        instructions.gameObject.SetActive(false);
+        but.gameObject.SetActive(true);
     }
 }
