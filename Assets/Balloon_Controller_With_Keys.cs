@@ -11,11 +11,6 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
 
     public float speed = 1f;
 
-    public float endY1 = -1.3f;
-    public float endY2 = -1.45f;
-    public float endX1 = 2.6f;
-    public float endX2 = 3f;
-
     bool moving = true;
 
     public int correctTarget = 1;
@@ -27,11 +22,6 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
         maxX = -minX;
         minY = transform.position.y;
         maxY = -minY;
-
-        endY1 = -1.3f;
-        endY2 = -1.45f;
-        endX1 = 2.6f;
-        endX2 = 3f;  
     }
 
     // Update is called once per frame
