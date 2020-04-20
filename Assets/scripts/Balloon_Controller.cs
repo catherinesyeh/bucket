@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Balloon_Controller_With_Keys : MonoBehaviour
+public class Balloon_Controller : MonoBehaviour
 {
     public float minX = -4.5f;
     public float maxX = 4.5f;
@@ -13,9 +13,10 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
     public float speed = 1f;
 
     bool moving = false;
+    bool started = false;
     public Text message;
-    public Text instructions;
     public Button but;
+    public Button startBut;
 
     public int correctTarget = 1;
 
@@ -35,20 +36,19 @@ public class Balloon_Controller_With_Keys : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    	if (moving) {
+        if (!started && !startBut.gameObject.activeInHierarchy)
+        { // start moving after instructions appear
+            moving = true;
+            started = true;
+        }
+
+        if (moving) {
 	    	var xPos = transform.position.x;
 	        transform.position = new Vector3(Mathf.PingPong(Time.time * 2, maxX - minX) + minX, transform.position.y, transform.position.z);
 
 	    	var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0); // copied code from https://answers.unity.com/questions/667641/how-do-i-move-my-2d-object-using-arrow-keys-also-h.html
 	        transform.position += move * speed * Time.deltaTime;
 	    }
-    }
-
-    void start_Game()
-    {
-        GameObject.Find("Start").gameObject.SetActive(false);
-        instructions.gameObject.SetActive(false);
-        moving = true;
     }
 
     // Detects collision with the targets
