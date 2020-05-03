@@ -15,8 +15,9 @@ public class Balloon_Controller : MonoBehaviour
     bool moving = false;
     bool started = false;
     public Text message;
-    public Button but;
-    public Button startBut;
+    public Button but; // play again
+    public Button startBut; // start
+    public Button contBut; // continue
 
     public int correctTarget = 1;
 
@@ -31,6 +32,7 @@ public class Balloon_Controller : MonoBehaviour
 
         message.text = "";
         but.gameObject.SetActive(false);
+        contBut.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -70,5 +72,6 @@ public class Balloon_Controller : MonoBehaviour
         }
 
         but.gameObject.SetActive(true);
+        contBut.gameObject.SetActive(true);
     }
 }
