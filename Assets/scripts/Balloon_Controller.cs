@@ -60,15 +60,40 @@ public class Balloon_Controller : MonoBehaviour
     	} 
     	else if (other.name == "Target 2") {
     		Debug.Log("Target 2: collision detected");
-    	}
+        }
     	moving = false;
 
         if (other.name[7] == correctTarget.ToString()[0]) {
-            Debug.Log("Congratulations! You landed on the right target!");
-            message.text = "Congratulations! You landed on the right target!";
+            if (GameTracker.firstTime)
+            {
+                message.text = "Congratulations! You landed on the right target!\n\nWow, that's impressive because there was no way you" + 
+                               " could’ve known which was the right target, so your P(Known) in this instance was probably pretty close to 0." + 
+                               " You did, however, have a 50% chance of getting it right, as there are two targets. So P(Guess) in this instance" + 
+                               " was 0.5.";
+
+                GameTracker.firstTime = false;
+                Debug.Log(GameTracker.firstTime);
+            }
+            else
+            {
+                message.text = "Congratulations! You landed on the right target!\n\nNow you know which target is the correct one, so your" +
+                               " P(known) is 1.";
+            }
         } else {
-            Debug.Log("Oops! Better luck next time.");
-            message.text = "Oops! Better luck next time.";
+            if (GameTracker.firstTime)
+            {
+                message.text = "Oops! Better luck next time.\n\nIt’s alright, there was no way you could’ve known which was the right target," +
+               " so your P(Known) in this instance was probably pretty close to 0. You did, however, have a 50% chance of getting it right," +
+               " as there are two targets. So P(Guess) in this instance was 0.5.";
+
+                GameTracker.firstTime = false;
+                Debug.Log(GameTracker.firstTime);
+            }
+            else
+            {
+                message.text = "Oops! Better luck next time.\n\nEven though you know which target is the correct one, and your P(known) is 1," +
+                               " sometimes we still make mistakes.";
+            }
         }
 
         but.gameObject.SetActive(true);
