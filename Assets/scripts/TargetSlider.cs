@@ -9,9 +9,9 @@ public class TargetSlider : MonoBehaviour
     public Slider targetSlider;
 
     // Update is called once per frame
-    public void updateNumTargets() 
+    public void Update() 
     {
     	numTargets = (int) targetSlider.value;
-    	Debug.Log("this many targets now: " + numTargets);
+    	// Debug.Log("this many targets now: " + numTargets);
     }
 }
