@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Balloon_Controller : MonoBehaviour
 {
@@ -19,11 +19,16 @@ public class Balloon_Controller : MonoBehaviour
     public Button startBut; // start
     public Button contBut; // continue
 
-    public static int correctTarget;
+    public static int numTargets = 2;
+    public static int correctTarget = 1;
+    public Slider slider;
 
     // Start is called before the first frame update
     void Start()
     {
+        moving = false;
+        started = false; 
+
         minX = transform.position.x;
         maxX = -minX;
 
@@ -33,10 +38,6 @@ public class Balloon_Controller : MonoBehaviour
         message.text = "";
         but.gameObject.SetActive(false);
         contBut.gameObject.SetActive(false);
-        if (GameTracker.firstTime) {
-            correctTarget = Random.Range(1,3);
-            Debug.Log(correctTarget.ToString());
-        }
     }
 
     // Update is called once per frame
@@ -46,6 +47,19 @@ public class Balloon_Controller : MonoBehaviour
         { // start moving after instructions appear
             moving = true;
             started = true;
+
+            Debug.Log("P(guess)?: " + GameTracker.pGuess);
+            Debug.Log("First time?: " + GameTracker.firstTime);
+
+            if (GameTracker.firstTime || GameTracker.pGuess)
+            {
+                if (GameTracker.pGuess)
+                {
+                    numTargets = (int)slider.value;
+                }
+                Debug.Log("Num targets: " + numTargets);
+                pickCorrectTarget(numTargets);
+            }
         }
 
         if (moving) {
@@ -57,15 +71,24 @@ public class Balloon_Controller : MonoBehaviour
 	    }
     }
 
+    // pick target to be correct one
+    void pickCorrectTarget(int numTargets)
+    {
+        if (numTargets > 1)
+        { // pick random target if more than 1
+            correctTarget = Random.Range(1, numTargets + 1);
+        } else
+        {
+            correctTarget = 1;
+        }
+        Debug.Log("Correct target: " + correctTarget.ToString());
+    }
+
     // Detects collision with the targets
     void OnTriggerEnter2D(Collider2D other) { // used tutorial https://www.youtube.com/watch?v=ZoZcBgRR9ns
-    	if (other.name == "Target 1") {
-    		Debug.Log("Target 1: collision detected");
-    	} 
-    	else if (other.name == "Target 2") {
-    		Debug.Log("Target 2: collision detected");
-        }
     	moving = false;
+
+        // Debug.Log("Correct target: " + correctTarget.ToString());
 
         if (other.name[7] == correctTarget.ToString()[0]) {
             if (GameTracker.pKnown) {
@@ -77,7 +100,7 @@ public class Balloon_Controller : MonoBehaviour
                                    " was 0.5.";
 
                     GameTracker.firstTime = false;
-                    Debug.Log(GameTracker.firstTime);
+                  //  Debug.Log(GameTracker.firstTime);
                 }
                 else
                 {
@@ -86,6 +109,7 @@ public class Balloon_Controller : MonoBehaviour
                 }
             } else if (GameTracker.pGuess) {
                 Debug.Log("alohhaa");
+                message.text = "Congratulations! You landed on the right target!";
             }
         } else {
             if (GameTracker.pKnown) {
@@ -96,7 +120,7 @@ public class Balloon_Controller : MonoBehaviour
                    " as there are two targets. So P(Guess) in this instance was 0.5.";
 
                     GameTracker.firstTime = false;
-                    Debug.Log(GameTracker.firstTime);
+                  //  Debug.Log(GameTracker.firstTime);
                 }
                 else
                 {
@@ -105,6 +129,7 @@ public class Balloon_Controller : MonoBehaviour
                 }
             } else if (GameTracker.pGuess) {
                 Debug.Log("Oopsie doodles");
+                message.text = "Oops! Better luck next time.";
             }
         }
 

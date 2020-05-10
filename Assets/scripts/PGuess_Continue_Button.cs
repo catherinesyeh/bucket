@@ -11,7 +11,7 @@ public class PGuess_Continue_Button : MonoBehaviour
     {
     	GameTracker.pGuess = true;
     	GameTracker.pKnown = false;
-    	//Debug.Log(pKnown);
+        GameTracker.firstTime = true;
 
         SceneManager.LoadScene("P(guess)");
     }
