@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Continue button to progress from the p(Known) scene to the p(Guess) scene
 public class PGuess_Continue_Button : MonoBehaviour
 {
 

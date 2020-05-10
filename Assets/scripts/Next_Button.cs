@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+// Class to help control the intro scene
 public class Next_Button : MonoBehaviour
 {
-	int slide = 0;
+	int slide = 0; // Tracks which message the user should be shown
 
     public Button back;
     public Button next;
@@ -16,21 +18,21 @@ public class Next_Button : MonoBehaviour
         updateText();
     }
 
-    public void pressNext()
+    public void pressNext() // Next button was pressed, advances user by one slide
     {
         Debug.Log("Next button pressed");
         slide++;
         updateText();
     }
 
-    public void pressBack()
+    public void pressBack() // Back button was pressed, regresses user by one slide
     {
         Debug.Log("Back button pressed");
         slide--;
         updateText();
     }
 
-    public void backToMenu()
+    public void backToMenu() // Brings the user back to the menu
     {
         Debug.Log("Back to menu");
         slide = 3;
@@ -38,7 +40,7 @@ public class Next_Button : MonoBehaviour
         updateText();
     }
 
-    public void updateText() 
+    public void updateText() // Controls what text the user is shown depending on what 'slide' they're on
     { 
         if (slide == 0)
         {
