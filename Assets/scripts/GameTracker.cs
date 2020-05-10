@@ -6,7 +6,7 @@ public class GameTracker : MonoBehaviour
 {
     public static bool firstTime = true;
 
-    public static bool pGuess = true;
+    public static bool pKnown = true;
 
-    public static bool pKnown = false; 
+    public static bool pGuess = false;
 }

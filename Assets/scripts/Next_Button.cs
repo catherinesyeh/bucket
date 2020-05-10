@@ -77,7 +77,7 @@ public class Next_Button : MonoBehaviour
         }
         else
         { // go to next scene
-            SceneManager.LoadScene("P(guess)");
+            SceneManager.LoadScene("P(known)");
         }
     }
 }

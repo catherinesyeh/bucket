@@ -9,10 +9,10 @@ public class PGuess_Continue_Button : MonoBehaviour
 
     public void pressContinue()
     {
-    	GameTracker.pGuess = false;
-    	GameTracker.pKnown = true;
+    	GameTracker.pGuess = true;
+    	GameTracker.pKnown = false;
     	//Debug.Log(pKnown);
 
-        SceneManager.LoadScene("P(known)");
+        SceneManager.LoadScene("P(guess)");
     }
 }

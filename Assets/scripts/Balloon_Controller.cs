@@ -68,7 +68,7 @@ public class Balloon_Controller : MonoBehaviour
     	moving = false;
 
         if (other.name[7] == correctTarget.ToString()[0]) {
-            if (GameTracker.pGuess) {
+            if (GameTracker.pKnown) {
                 if (GameTracker.firstTime)
                 {
                     message.text = "Congratulations! You landed on the right target!\n\nWow, that's impressive because there was no way you" + 
@@ -84,11 +84,11 @@ public class Balloon_Controller : MonoBehaviour
                     message.text = "Congratulations! You landed on the right target!\n\nNow you know which target is the correct one, so your" +
                                    " P(known) is 1.";
                 }
-            } else if (GameTracker.pKnown) {
+            } else if (GameTracker.pGuess) {
                 Debug.Log("alohhaa");
             }
         } else {
-            if (GameTracker.pGuess) {
+            if (GameTracker.pKnown) {
                 if (GameTracker.firstTime)
                 {
                     message.text = "Oops! Better luck next time.\n\nIt’s alright, there was no way you could’ve known which was the right target," +
@@ -103,7 +103,7 @@ public class Balloon_Controller : MonoBehaviour
                     message.text = "Oops! Better luck next time.\n\nEven though you know which target is the correct one, and your P(known) is 1," +
                                    " sometimes we still make mistakes.";
                 }
-            } else if (GameTracker.pKnown) {
+            } else if (GameTracker.pGuess) {
                 Debug.Log("Oopsie doodles");
             }
         }
