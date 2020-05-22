@@ -7,6 +7,7 @@ public class SliderValueToText : MonoBehaviour
     public Slider sliderUI;
     private Text textSliderValue;
 
+    // Each target that's 'spawned' when the slider is moved has to be made as an individual public GameObject in order for the user to interact with it properly
     public GameObject target1;
     public GameObject target2;
     public GameObject target3;
@@ -18,10 +19,10 @@ public class SliderValueToText : MonoBehaviour
     void Start()
     {
         textSliderValue = GetComponent<Text>();
-        sliderUI.value = 2;
+        sliderUI.value = 2; // Default number of targets is 2
     }
 
-    public void OnSliderValueChanged(float num)
+    public void OnSliderValueChanged(float num) // Updates the text to reflect the correct number of targets showing on the screen
     {
         string sliderMessage = "Number of Targets = " + num.ToString() + ", P(guess) = 1/" + num.ToString();
         textSliderValue.text = sliderMessage;
@@ -29,9 +30,9 @@ public class SliderValueToText : MonoBehaviour
         updateTargets(num);
     }
 
-    public void updateTargets(float num)
+    public void updateTargets(float num) // 'Spawns' targets
     {
-
+        // Each case must be handled individually for users to interact with the targets correctly 
         if (num == 1)
         { // 1 target
             target1.SetActive(true);
